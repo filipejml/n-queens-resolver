@@ -22,12 +22,19 @@ def testar_algoritmos(N):
     inicio_lbs = time.time()
     solucao_lbs = local_beam_search(N)
     tempo_lbs = time.time() - inicio_lbs
-    print(f"Feixe Local: {tempo_lbs:.4f} segundos, Solução: {solucao_lbs}")
+    if solucao_lbs:
+        print(f"Feixe Local: {tempo_lbs:.4f} segundos, Solução: {solucao_lbs}")
+    else:
+        print(f"Feixe Local: Nenhuma solução encontrada em {tempo_lbs:.4f} segundos")
 
 if __name__ == "__main__":
-    try:
-        # Solicita ao usuário a quantidade de rainhas para o teste
-        N = int(input("Digite o número de rainhas para o teste: "))
-        testar_algoritmos(N)
-    except ValueError:
-        print("Por favor, insira um número válido.")
+    while True:
+        try:
+            # Solicita ao usuário a quantidade de rainhas para o teste
+            N = int(input("Digite o número de rainhas para o teste (ou -1 para sair): "))
+            if N == -1:
+                print("Saindo do programa.")
+                break  # Sai do loop se o usuário digitar -1
+            testar_algoritmos(N)
+        except ValueError:
+            print("Por favor, insira um número válido.")
